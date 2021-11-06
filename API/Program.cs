@@ -2,14 +2,12 @@ using API.Data;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
-var provider = builder.Services.BuildServiceProvider();
-var Configuration = provider.GetRequiredService<IConfiguration>();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<Context>(optoins =>
-                optoins.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+                optoins.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 var app = builder.Build();
 
